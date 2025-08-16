@@ -30,6 +30,18 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
+            background: #FFFFFF;
+        }
+        
+        /* 메인 화면 전용 스타일 */
+        #mainScreen {
+            background: #FFFFFF;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
         }
         
         /* 메인페이지 컨테이너 */
@@ -37,8 +49,9 @@
             width: 100%;
             max-width: 390px;
             margin: 0 auto;
-            overflow-x: auto;
+            overflow: hidden;
             background: white;
+            position: relative;
         }
         
         /* 메인페이지 테이블 - 모바일 스케일링 */
@@ -46,23 +59,35 @@
             width: 1126px; /* 원본 크기 유지 */
             height: 2437px; /* 원본 크기 유지 */
             border-collapse: collapse;
+            border-spacing: 0;
             transform-origin: top left;
-            transform: scale(0.35); /* 모바일에 맞게 스케일 조정 */
+            transform: scale(0.3464); /* 390/1126 = 0.3464 - 더 정확한 계산 */
             margin: 0;
             padding: 0;
+            position: relative;
+            left: 0;
+            top: 0;
+            table-layout: fixed; /* 테이블 레이아웃 고정 */
         }
         
         /* 스케일된 테이블을 위한 컨테이너 조정 */
         .main-page-container {
-            width: 394px; /* 1126 * 0.35 */
-            height: 853px; /* 2437 * 0.35 */
+            width: 390px; /* 1126 * 0.3464 = 390 */
+            height: 844px; /* 2437 * 0.3464 = 844.4 */
             overflow: hidden;
+            margin: 0 auto;
+            border: 0;
+            padding: 0;
         }
         
         #mainPageTable img {
             max-width: none; /* 원본 크기 유지 */
+            width: auto;
             height: auto;
             display: block;
+            margin: 0;
+            padding: 0;
+            border: 0;
         }
         
         #mainPageTable td {
@@ -70,27 +95,77 @@
             margin: 0;
             border: 0;
             vertical-align: top;
+            line-height: 0; /* 이미지 간 공백 제거 */
+            font-size: 0; /* 텍스트 노드로 인한 공백 제거 */
         }
         
         /* 클릭 가능한 영역 강조 */
         #mainPageTable a {
             display: block;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.2s ease;
+            margin: 0;
+            padding: 0;
+            line-height: 0;
         }
         
         #mainPageTable a:hover {
-            opacity: 0.8;
+            opacity: 0.85;
+        }
+        
+        #mainPageTable a:active {
+            opacity: 0.7;
         }
         
         /* 터치 디바이스를 위한 탭 하이라이트 제거 */
         #mainPageTable a {
             -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
         
-        /* 모바일 뷰포트에서 컨테이너 중앙 정렬 */
+        /* 스페이서 이미지 숨기기 (레이아웃만 유지) */
+        #mainPageTable img[src*="스페이서.gif"] {
+            opacity: 0;
+        }
+        
+        /* 모바일 뷰포트에서 세밀한 조정 */
         @media (max-width: 400px) {
             .main-page-container {
+                width: 100vw;
+                max-width: 390px;
                 margin: 0 auto;
+            }
+            
+            #mainPageTable {
+                transform: scale(calc(100vw / 1126));
+                transform-origin: top center;
+            }
+        }
+        
+        /* 아이폰 SE 등 작은 화면 대응 */
+        @media (max-width: 375px) {
+            #mainPageTable {
+                transform: scale(0.333); /* 375/1126 = 0.333 */
+            }
+            
+            .main-page-container {
+                width: 375px;
+                height: 811px; /* 2437 * 0.333 */
+            }
+        }
+        
+        /* 더 큰 화면에서의 조정 */
+        @media (min-width: 391px) and (max-width: 480px) {
+            #mainPageTable {
+                transform: scale(0.35);
+            }
+            
+            .main-page-container {
+                width: 394px; /* 1126 * 0.35 */
+                height: 853px; /* 2437 * 0.35 */
             }
         }
         
