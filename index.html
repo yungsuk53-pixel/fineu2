@@ -41,16 +41,26 @@
             background: white;
         }
         
-        /* 메인페이지 테이블 */
+        /* 메인페이지 테이블 - 모바일 스케일링 */
         #mainPageTable {
-            width: 100%;
-            max-width: 390px;
-            height: auto;
+            width: 1126px; /* 원본 크기 유지 */
+            height: 2437px; /* 원본 크기 유지 */
             border-collapse: collapse;
+            transform-origin: top left;
+            transform: scale(0.35); /* 모바일에 맞게 스케일 조정 */
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* 스케일된 테이블을 위한 컨테이너 조정 */
+        .main-page-container {
+            width: 394px; /* 1126 * 0.35 */
+            height: 853px; /* 2437 * 0.35 */
+            overflow: hidden;
         }
         
         #mainPageTable img {
-            max-width: 100%;
+            max-width: none; /* 원본 크기 유지 */
             height: auto;
             display: block;
         }
@@ -60,11 +70,6 @@
             margin: 0;
             border: 0;
             vertical-align: top;
-        }
-        
-        /* 이미지 반응형 처리 */
-        #mainPageTable img[width="100%"] {
-            width: 100%;
         }
         
         /* 클릭 가능한 영역 강조 */
@@ -80,6 +85,13 @@
         /* 터치 디바이스를 위한 탭 하이라이트 제거 */
         #mainPageTable a {
             -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* 모바일 뷰포트에서 컨테이너 중앙 정렬 */
+        @media (max-width: 400px) {
+            .main-page-container {
+                margin: 0 auto;
+            }
         }
         
         .screen {
@@ -462,290 +474,331 @@
 <!-- 메인 화면 -->
 <div id="mainScreen" class="screen">
     <div class="main-page-container">
-        <!-- 메인페이지.html과 동일한 테이블 구조 -->
-        <table id="mainPageTable" width="100%" border="0" cellpadding="0" cellspacing="0">
+        <!-- 메인페이지.html과 완전히 동일한 테이블 구조 -->
+        <table id="mainPageTable" width="1126" height="2437" border="0" cellpadding="0" cellspacing="0">
             <tr>
                 <td colspan="36">
-                    <img src="images/메인페이지_01.png" width="100%" alt="메인 헤더"></td>
+                    <img src="images/메인페이지_01.png" width="1125" height="190" alt=""></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="190" alt=""></td>
             </tr>
             <tr>
                 <td colspan="15" rowspan="2">
-                    <img src="images/메인페이지_02.png" alt=""></td>
+                    <img src="images/메인페이지_02.png" width="332" height="23" alt=""></td>
                 <td colspan="11" rowspan="5">
                     <a href="#" onclick="showNotifications()">
-                        <img src="images/메인페이지_03.png" width="100%" border="0" alt="웹 제목"></a></td>
+                        <img src="images/메인페이지_03.png" width="467" height="153" border="0" alt="웹 제목"></a></td>
                 <td colspan="10">
-                    <img src="images/메인페이지_04.png" alt=""></td>
+                    <img src="images/메인페이지_04.png" width="326" height="21" alt=""></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="21" alt=""></td>
             </tr>
             <tr>
                 <td colspan="3" rowspan="6">
-                    <img src="images/메인페이지_05.png" alt=""></td>
+                    <img src="images/메인페이지_05.png" width="164" height="356" alt=""></td>
                 <td colspan="3" rowspan="3">
                     <a href="#" onclick="showNotifications()">
-                        <img src="images/메인페이지_06.png" border="0" alt="알림 요약 버튼"></a></td>
+                        <img src="images/메인페이지_06.png" width="96" height="115" border="0" alt="알림 요약 버튼"></a></td>
                 <td colspan="4" rowspan="6">
-                    <img src="images/메인페이지_07.png" alt=""></td>
+                    <img src="images/메인페이지_07.png" width="66" height="356" alt=""></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="2" alt=""></td>
             </tr>
             <tr>
                 <td colspan="2" rowspan="5">
-                    <img src="images/메인페이지_08.png" alt=""></td>
+                    <img src="images/메인페이지_08.png" width="74" height="354" alt=""></td>
                 <td colspan="8">
                     <a href="#" onclick="showProfileDetail()">
-                        <img src="images/메인페이지_09.png" border="0" alt="사용자 프로필 표시 영역"></a></td>
+                        <img src="images/메인페이지_09.png" width="112" height="111" border="0" alt="사용자 프로필 표시 영역"></a></td>
                 <td colspan="5" rowspan="4">
-                    <img src="images/메인페이지_10.png" alt=""></td>
+                    <img src="images/메인페이지_10.png" width="146" height="247" alt=""></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="111" alt=""></td>
             </tr>
             <tr>
                 <td colspan="8" rowspan="3">
-                    <img src="images/메인페이지_11.png" alt=""></td>
+                    <img src="images/메인페이지_11.png" width="112" height="136" alt=""></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="2" alt=""></td>
             </tr>
             <tr>
                 <td colspan="3" rowspan="3">
-                    <img src="images/메인페이지_12.png" alt=""></td>
+                    <img src="images/메인페이지_12.png" width="96" height="241" alt=""></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="17" alt=""></td>
             </tr>
             <tr>
                 <td colspan="11">
-                    <img src="images/메인페이지_13.png" alt=""></td>
+                    <img src="images/메인페이지_13.png" width="467" height="117" alt=""></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="117" alt=""></td>
             </tr>
             <tr>
                 <td>
-                    <img src="images/메인페이지_14.png" alt=""></td>
+                    <img src="images/메인페이지_14.png" width="2" height="107" alt=""></td>
                 <td colspan="21" rowspan="4">
                     <a href="#" onclick="showPortfolioDetail()">
-                        <img src="images/메인페이지_15.png" border="0" alt="프로필 문구"></a></td>
+                        <img src="images/메인페이지_15.png" width="670" height="395" border="0" alt="프로필 문구"></a></td>
                 <td colspan="2">
-                    <img src="images/메인페이지_16.png" alt=""></td>
+                    <img src="images/메인페이지_16.png" width="53" height="107" alt=""></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="107" alt=""></td>
             </tr>
             <tr>
                 <td rowspan="26">
-                    <img src="images/메인페이지_17.png" alt=""></td>
+                    <img src="images/메인페이지_17.png" width="73" height="1869" alt=""></td>
                 <td colspan="2" rowspan="5">
                     <a href="#" onclick="showProfileDetail()">
-                        <img src="images/메인페이지_18.png" border="0" alt="프로필 영역"></a></td>
+                        <img src="images/메인페이지_18.png" width="3" height="345" border="0" alt="프로필 영역"></a></td>
                 <td colspan="9">
                     <a href="#" onclick="showProfileDetail()">
-                        <img src="images/메인페이지_19.png" border="0" alt="프로필 영역"></a></td>
+                        <img src="images/메인페이지_19.png" width="315" height="47" border="0" alt="프로필 영역"></a></td>
                 <td colspan="3" rowspan="7">
-                    <img src="images/메인페이지_20.png" alt=""></td>
+                    <img src="images/메인페이지_20.png" width="64" height="520" alt=""></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="47" alt=""></td>
+            </tr>
+            <tr>
+                <td colspan="4" rowspan="4">
+                    <a href="#" onclick="showProfileDetail()">
+                        <img src="images/메인페이지_21.png" width="205" height="298" border="0" alt="프로필 영역"></a></td>
+                <td colspan="3">
+                    <img src="images/메인페이지_22.png" width="58" height="61" alt=""></td>
+                <td colspan="2" rowspan="4">
+                    <a href="#" onclick="showProfileDetail()">
+                        <img src="images/메인페이지_23.png" width="52" height="298" border="0" alt="프로필 영역"></a></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="61" alt=""></td>
+            </tr>
+            <tr>
+                <td colspan="3" rowspan="3">
+                    <a href="#" onclick="showProfileDetail()">
+                        <img src="images/메인페이지_24.png" width="58" height="237" border="0" alt="프로필 영역"></a></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="180" alt=""></td>
+            </tr>
+            <tr>
+                <td colspan="4" rowspan="2">
+                    <a href="#" onclick="showProfileDetail()">
+                        <img src="images/메인페이지_25.png" width="54" height="57" border="0" alt="프로필 영역"></a></td>
+                <td colspan="10">
+                    <img src="images/메인페이지_26.png" width="257" height="14" alt=""></td>
+                <td colspan="7" rowspan="2">
+                    <a href="#" onclick="showProfileDetail()">
+                        <img src="images/메인페이지_27.png" width="359" height="57" border="0" alt="프로필 영역"></a></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="14" alt=""></td>
+            </tr>
+            <tr>
+                <td colspan="10">
+                    <a href="#" onclick="showProfileDetail()">
+                        <img src="images/메인페이지_28.png" width="257" height="43" border="0" alt="프로필 영역"></a></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="43" alt=""></td>
+            </tr>
+            <tr>
+                <td colspan="32">
+                    <img src="images/메인페이지_29.png" width="988" height="66" alt=""></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="66" alt=""></td>
+            </tr>
+            <tr>
+                <td rowspan="20">
+                    <img src="images/메인페이지_30.png" width="1" height="1458" alt=""></td>
+                <td colspan="10" rowspan="4">
+                    <a href="#" onclick="showAssetDetail()">
+                        <img src="images/메인페이지_31.png" width="203" height="238" border="0" alt="에셋 문구"></a></td>
+                <td colspan="21">
+                    <img src="images/메인페이지_32.png" width="784" height="109" alt=""></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="109" alt=""></td>
+            </tr>
+            <tr>
+                <td colspan="22">
+                    <a href="#" onclick="showAssetDetail()">
+                        <img src="images/메인페이지_33.png" width="787" height="57" border="0" alt="에셋 영역"></a></td>
+                <td colspan="2" rowspan="11">
+                    <img src="images/메인페이지_34.png" width="61" height="520" alt=""></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="57" alt=""></td>
+            </tr>
+            <tr>
+                <td rowspan="3">
+                    <a href="#" onclick="showAssetDetail()">
+                        <img src="images/메인페이지_35.png" width="19" height="116" border="0" alt="에셋 영역"></a></td>
+                <td colspan="9">
+                    <a href="#" onclick="showCashDetail()">
+                        <img src="images/메인페이지_36.png" width="375" height="52" border="0" alt="보유 현금"></a></td>
+                <td colspan="12" rowspan="3">
+                    <a href="#" onclick="showAssetDetail()">
+                        <img src="images/메인페이지_37.png" width="393" height="116" border="0" alt="에셋 영역"></a></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="52" alt=""></td>
             </tr>
             <tr>
                 <td colspan="9" rowspan="2">
-                    <img src="images/메인페이지_21.png" alt=""></td>
+                    <a href="#" onclick="showAssetDetail()">
+                        <img src="images/메인페이지_38.png" width="375" height="64" border="0" alt="에셋 영역"></a></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="20" alt=""></td>
             </tr>
             <tr>
+                <td rowspan="16">
+                    <img src="images/메인페이지_39.png" width="2" height="1220" alt=""></td>
+                <td colspan="9">
+                    <a href="#" onclick="showAssetDetail()">
+                        <img src="images/메인페이지_40.png" width="201" height="44" border="0" alt="에셋 영역"></a></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="44" alt=""></td>
+            </tr>
+            <tr>
+                <td colspan="5" rowspan="4">
+                    <a href="#" onclick="showAssetDetail()">
+                        <img src="images/메인페이지_41.png" width="55" height="172" border="0" alt="에셋 영역"></a></td>
+                <td colspan="22">
+                    <a href="#" onclick="showStockDetail('삼성전자')">
+                        <img src="images/메인페이지_42.png" width="874" height="48" border="0" alt="자산 분류1"></a></td>
+                <td colspan="4" rowspan="4">
+                    <a href="#" onclick="showAssetDetail()">
+                        <img src="images/메인페이지_43.png" width="59" height="172" border="0" alt="에셋 영역"></a></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="48" alt=""></td>
+            </tr>
+            <tr>
+                <td colspan="22">
+                    <a href="#" onclick="showAssetDetail()">
+                        <img src="images/메인페이지_44.png" width="874" height="31" border="0" alt="에셋 영역"></a></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="31" alt=""></td>
+            </tr>
+            <tr>
+                <td rowspan="2">
+                    <a href="#" onclick="showAssetDetail()">
+                        <img src="images/메인페이지_45.png" width="1" height="93" border="0" alt="에셋 영역"></a></td>
+                <td colspan="11">
+                    <a href="#" onclick="showStockDetail('청년희망적금')">
+                        <img src="images/메인페이지_46.png" width="444" height="48" border="0" alt="자산 분류 2"></a></td>
+                <td colspan="10" rowspan="2">
+                    <a href="#" onclick="showAssetDetail()">
+                        <img src="images/메인페이지_47.png" width="429" height="93" border="0" alt="에셋 영역"></a></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="48" alt=""></td>
+            </tr>
+            <tr>
+                <td colspan="11">
+                    <a href="#" onclick="showAssetDetail()">
+                        <img src="images/메인페이지_48.png" width="444" height="45" border="0" alt="에셋 영역"></a></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="45" alt=""></td>
+            </tr>
+            <tr>
+                <td colspan="31">
+                    <img src="images/메인페이지_49.png" width="988" height="66" alt=""></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="66" alt=""></td>
+            </tr>
+            <tr>
+                <td rowspan="10">
+                    <img src="images/메인페이지_50.png" width="2" height="938" alt=""></td>
+                <td colspan="12">
+                    <a href="#" onclick="showPortfolioDetail()">
+                        <img src="images/메인페이지_51.png" width="296" height="46" border="0" alt="포트폴리오 문구"></a></td>
+                <td colspan="18" rowspan="2">
+                    <img src="images/메인페이지_52.png" width="690" height="109" alt=""></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="46" alt=""></td>
+            </tr>
+            <tr>
+                <td colspan="12">
+                    <img src="images/메인페이지_53.png" width="296" height="63" alt=""></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="63" alt=""></td>
+            </tr>
+            <tr>
+                <td rowspan="8">
+                    <img src="images/메인페이지_54.png" width="5" height="829" alt=""></td>
+                <td colspan="30">
+                    <a href="#" onclick="showPortfolioDetail()">
+                        <img src="images/메인페이지_55.png" width="987" height="41" border="0" alt="포트폴리오 영역"></a></td>
+                <td rowspan="8">
+                    <img src="images/메인페이지_56.png" width="55" height="829" alt=""></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="41" alt=""></td>
+            </tr>
+            <tr>
+                <td colspan="11" rowspan="2">
+                    <a href="#" onclick="showPortfolioDetail()">
+                        <img src="images/메인페이지_57.png" width="291" height="450" border="0" alt="포트폴리오 영역"></a></td>
+                <td colspan="9">
+                    <a href="#" onclick="showPortfolioChart()">
+                        <img src="images/메인페이지_58.png" width="408" height="409" border="0" alt="포트폴리오 그래프"></a></td>
+                <td colspan="10" rowspan="2">
+                    <a href="#" onclick="showPortfolioDetail()">
+                        <img src="images/메인페이지_59.png" width="288" height="450" border="0" alt="포트폴리오 영역"></a></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="409" alt=""></td>
             </tr>
             <tr>
                 <td colspan="9">
-                    <img src="images/메인페이지_22.png" alt=""></td>
+                    <a href="#" onclick="showPortfolioDetail()">
+                        <img src="images/메인페이지_60.png" width="408" height="41" border="0" alt="포트폴리오 영역"></a></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="41" alt=""></td>
             </tr>
             <tr>
-                <td colspan="2">
-                    <img src="images/메인페이지_23.png" alt=""></td>
-                <td colspan="7">
-                    <a href="#" onclick="navigateToPage('a4.html')">
-                        <img src="images/메인페이지_24.png" border="0" alt="포트폴리오"></a></td>
+                <td colspan="14">
+                    <img src="images/메인페이지_61.png" width="393" height="132" alt=""></td>
+                <td colspan="2" rowspan="3">
+                    <a href="#" onclick="navigateToPage('a5.html')">
+                        <img src="images/메인페이지_62.png" width="180" height="180" border="0" alt="등급존 이동 버튼"></a></td>
+                <td colspan="14" rowspan="2">
+                    <img src="images/메인페이지_63.png" width="414" height="135" alt=""></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="132" alt=""></td>
             </tr>
             <tr>
-                <td colspan="9" rowspan="2">
-                    <img src="images/메인페이지_25.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="2" rowspan="25">
-                    <img src="images/메인페이지_26.png" alt=""></td>
-            </tr>
-            <!-- 하단 네비게이션 영역 -->
-            <tr>
-                <td colspan="9">
-                    <img src="images/메인페이지_27.png" alt=""></td>
-                <td colspan="3">
-                    <img src="images/메인페이지_28.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="3">
+                <td rowspan="4">
+                    <img src="images/메인페이지_64.png" width="17" height="206" alt=""></td>
+                <td colspan="5" rowspan="3">
                     <a href="#" onclick="showMainScreen()">
-                        <img src="images/메인페이지_29.png" border="0" alt="홈"></a></td>
-                <td colspan="3">
+                        <img src="images/메인페이지_65.png" width="95" height="96" border="0" alt="메인페이지 버튼"></a></td>
+                <td colspan="3" rowspan="4">
+                    <img src="images/메인페이지_66.png" width="120" height="206" alt=""></td>
+                <td colspan="4" rowspan="3">
                     <a href="#" onclick="navigateToPage('a2.html')">
-                        <img src="images/메인페이지_30.png" border="0" alt="뉴스"></a></td>
-                <td colspan="3">
-                    <a href="#" onclick="navigateToPage('a3.html')">
-                        <img src="images/메인페이지_31.png" border="0" alt="거래"></a></td>
-                <td colspan="3">
+                        <img src="images/메인페이지_67.png" width="76" height="96" border="0" alt="뉴스페이지 버튼"></a></td>
+                <td rowspan="4">
+                    <img src="images/메인페이지_68.png" width="85" height="206" alt=""></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="3" alt=""></td>
+            </tr>
+            <tr>
+                <td colspan="2" rowspan="3">
+                    <img src="images/메인페이지_69.png" width="72" height="203" alt=""></td>
+                <td colspan="4" rowspan="2">
                     <a href="#" onclick="navigateToPage('a4.html')">
-                        <img src="images/메인페이지_32.png" border="0" alt="분석"></a></td>
-            </tr>
-            <!-- 더 많은 이미지 슬라이스들 -->
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_33.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_34.png" alt=""></td>
+                        <img src="images/메인페이지_70.png" width="93" height="93" border="0" alt="게임페이지 버튼"></a></td>
+                <td colspan="8" rowspan="3">
+                    <a href="#" onclick="navigateToPage('a3.html')">
+                        <img src="images/메인페이지_71.png" width="249" height="203" border="0" alt="더보기란 버튼"></a></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="45" alt=""></td>
             </tr>
             <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_35.png" alt=""></td>
+                <td colspan="2" rowspan="2">
+                    <img src="images/메인페이지_72.png" width="180" height="158" alt=""></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="48" alt=""></td>
             </tr>
             <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_36.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_37.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_38.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_39.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_40.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_41.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_42.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_43.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_44.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_45.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_46.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_47.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_48.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_49.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_50.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_51.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_52.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_53.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_54.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_55.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_56.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_57.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_58.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_59.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_60.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_61.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_62.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_63.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_64.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_65.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_66.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_67.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_68.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_69.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_70.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_71.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_72.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_73.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_74.png" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_75.png" alt=""></td>
+                <td colspan="5">
+                    <img src="images/메인페이지_73.png" width="95" height="110" alt=""></td>
+                <td colspan="4">
+                    <img src="images/메인페이지_74.png" width="76" height="110" alt=""></td>
+                <td colspan="4">
+                    <img src="images/메인페이지_75.png" width="93" height="110" alt=""></td>
+                <td>
+                    <img src="images/스페이서.gif" width="1" height="110" alt=""></td>
             </tr>
         </table>
     </div>
@@ -2316,6 +2369,22 @@ function showPortfolioDetail() {
 
 function showProfileDetail() {
     alert('프로필 상세 정보를 표시합니다.');
+}
+
+function showAssetDetail() {
+    alert('자산 상세 정보를 표시합니다.');
+}
+
+function showCashDetail() {
+    alert('보유 현금 정보를 표시합니다.');
+}
+
+function showStockDetail(stockName) {
+    alert(stockName + ' 상세 정보를 표시합니다.');
+}
+
+function showPortfolioChart() {
+    alert('포트폴리오 차트를 표시합니다.');
 }
 
 function updateMainScreenData() {
