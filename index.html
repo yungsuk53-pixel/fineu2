@@ -10,7 +10,7 @@
     <meta http-equiv="Expires" content="0">
     <meta name="cache-buster" content="v4.0.0-realtime-db">
     
-    <title>FINE U - 금융 플랫폼</title>
+    <title>FINE U - Firebase Realtime Database 연동</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -27,148 +27,7 @@
             zoom: 1;
             -webkit-text-size-adjust: 100%;
             -ms-text-size-adjust: 100%;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            background: #FFFFFF;
         }
-        
-        /* 메인 화면 전용 스타일 */
-        #mainScreen {
-            background: #FFFFFF;
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100vh;
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-        
-        /* 메인페이지 컨테이너 */
-        .main-page-container {
-            width: 100%;
-            max-width: 390px;
-            margin: 0 auto;
-            overflow: hidden;
-            background: white;
-            position: relative;
-        }
-        
-        /* 메인페이지 테이블 - 모바일 스케일링 */
-        #mainPageTable {
-            width: 1126px; /* 원본 크기 유지 */
-            height: 2437px; /* 원본 크기 유지 */
-            border-collapse: collapse;
-            border-spacing: 0;
-            transform-origin: top left;
-            transform: scale(0.3464); /* 390/1126 = 0.3464 - 더 정확한 계산 */
-            margin: 0;
-            padding: 0;
-            position: relative;
-            left: 0;
-            top: 0;
-            table-layout: fixed; /* 테이블 레이아웃 고정 */
-        }
-        
-        /* 스케일된 테이블을 위한 컨테이너 조정 */
-        .main-page-container {
-            width: 390px; /* 1126 * 0.3464 = 390 */
-            height: 844px; /* 2437 * 0.3464 = 844.4 */
-            overflow: hidden;
-            margin: 0 auto;
-            border: 0;
-            padding: 0;
-        }
-        
-        #mainPageTable img {
-            max-width: none; /* 원본 크기 유지 */
-            width: auto;
-            height: auto;
-            display: block;
-            margin: 0;
-            padding: 0;
-            border: 0;
-        }
-        
-        #mainPageTable td {
-            padding: 0;
-            margin: 0;
-            border: 0;
-            vertical-align: top;
-            line-height: 0; /* 이미지 간 공백 제거 */
-            font-size: 0; /* 텍스트 노드로 인한 공백 제거 */
-        }
-        
-        /* 클릭 가능한 영역 강조 */
-        #mainPageTable a {
-            display: block;
-            transition: opacity 0.2s ease;
-            margin: 0;
-            padding: 0;
-            line-height: 0;
-        }
-        
-        #mainPageTable a:hover {
-            opacity: 0.85;
-        }
-        
-        #mainPageTable a:active {
-            opacity: 0.7;
-        }
-        
-        /* 터치 디바이스를 위한 탭 하이라이트 제거 */
-        #mainPageTable a {
-            -webkit-tap-highlight-color: transparent;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-        
-        /* 스페이서 이미지 숨기기 (레이아웃만 유지) */
-        #mainPageTable img[src*="스페이서.gif"] {
-            opacity: 0;
-        }
-        
-        /* 모바일 뷰포트에서 세밀한 조정 */
-        @media (max-width: 400px) {
-            .main-page-container {
-                width: 100vw;
-                max-width: 390px;
-                margin: 0 auto;
-            }
-            
-            #mainPageTable {
-                transform: scale(calc(100vw / 1126));
-                transform-origin: top center;
-            }
-        }
-        
-        /* 아이폰 SE 등 작은 화면 대응 */
-        @media (max-width: 375px) {
-            #mainPageTable {
-                transform: scale(0.333); /* 375/1126 = 0.333 */
-            }
-            
-            .main-page-container {
-                width: 375px;
-                height: 811px; /* 2437 * 0.333 */
-            }
-        }
-        
-        /* 더 큰 화면에서의 조정 */
-        @media (min-width: 391px) and (max-width: 480px) {
-            #mainPageTable {
-                transform: scale(0.35);
-            }
-            
-            .main-page-container {
-                width: 394px; /* 1126 * 0.35 */
-                height: 853px; /* 2437 * 0.35 */
-            }
-        }
-        
         .screen {
             display: none;
             min-height: 100vh;
@@ -341,8 +200,14 @@
             transform: translateY(-1px);
         }
 
-        .nav-item i {
+        .nav-item i, .nav-item img {
             font-size: 20px;
+        }
+
+        .nav-item img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
         }
 
         .nav-item span {
@@ -350,8 +215,9 @@
             font-weight: 500;
         }
 
-        .nav-item.active i {
+        .nav-item.active i, .nav-item.active img {
             color: #3B82F6;
+            filter: brightness(0) saturate(100%) invert(38%) sepia(85%) saturate(1654%) hue-rotate(213deg) brightness(92%) contrast(91%);
         }
 
         .nav-item.active span {
@@ -548,334 +414,153 @@
 
 <!-- 메인 화면 -->
 <div id="mainScreen" class="screen">
-    <div class="main-page-container">
-        <!-- 메인페이지.html과 완전히 동일한 테이블 구조 -->
-        <table id="mainPageTable" width="1126" height="2437" border="0" cellpadding="0" cellspacing="0">
-            <tr>
-                <td colspan="36">
-                    <img src="images/메인페이지_01.png" width="1125" height="190" alt=""></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="190" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="15" rowspan="2">
-                    <img src="images/메인페이지_02.png" width="332" height="23" alt=""></td>
-                <td colspan="11" rowspan="5">
-                    <a href="#" onclick="showNotifications()">
-                        <img src="images/메인페이지_03.png" width="467" height="153" border="0" alt="웹 제목"></a></td>
-                <td colspan="10">
-                    <img src="images/메인페이지_04.png" width="326" height="21" alt=""></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="21" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="3" rowspan="6">
-                    <img src="images/메인페이지_05.png" width="164" height="356" alt=""></td>
-                <td colspan="3" rowspan="3">
-                    <a href="#" onclick="showNotifications()">
-                        <img src="images/메인페이지_06.png" width="96" height="115" border="0" alt="알림 요약 버튼"></a></td>
-                <td colspan="4" rowspan="6">
-                    <img src="images/메인페이지_07.png" width="66" height="356" alt=""></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="2" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="2" rowspan="5">
-                    <img src="images/메인페이지_08.png" width="74" height="354" alt=""></td>
-                <td colspan="8">
-                    <a href="#" onclick="showProfileDetail()">
-                        <img src="images/메인페이지_09.png" width="112" height="111" border="0" alt="사용자 프로필 표시 영역"></a></td>
-                <td colspan="5" rowspan="4">
-                    <img src="images/메인페이지_10.png" width="146" height="247" alt=""></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="111" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="8" rowspan="3">
-                    <img src="images/메인페이지_11.png" width="112" height="136" alt=""></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="2" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="3" rowspan="3">
-                    <img src="images/메인페이지_12.png" width="96" height="241" alt=""></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="17" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="11">
-                    <img src="images/메인페이지_13.png" width="467" height="117" alt=""></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="117" alt=""></td>
-            </tr>
-            <tr>
-                <td>
-                    <img src="images/메인페이지_14.png" width="2" height="107" alt=""></td>
-                <td colspan="21" rowspan="4">
-                    <a href="#" onclick="showPortfolioDetail()">
-                        <img src="images/메인페이지_15.png" width="670" height="395" border="0" alt="프로필 문구"></a></td>
-                <td colspan="2">
-                    <img src="images/메인페이지_16.png" width="53" height="107" alt=""></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="107" alt=""></td>
-            </tr>
-            <tr>
-                <td rowspan="26">
-                    <img src="images/메인페이지_17.png" width="73" height="1869" alt=""></td>
-                <td colspan="2" rowspan="5">
-                    <a href="#" onclick="showProfileDetail()">
-                        <img src="images/메인페이지_18.png" width="3" height="345" border="0" alt="프로필 영역"></a></td>
-                <td colspan="9">
-                    <a href="#" onclick="showProfileDetail()">
-                        <img src="images/메인페이지_19.png" width="315" height="47" border="0" alt="프로필 영역"></a></td>
-                <td colspan="3" rowspan="7">
-                    <img src="images/메인페이지_20.png" width="64" height="520" alt=""></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="47" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="4" rowspan="4">
-                    <a href="#" onclick="showProfileDetail()">
-                        <img src="images/메인페이지_21.png" width="205" height="298" border="0" alt="프로필 영역"></a></td>
-                <td colspan="3">
-                    <img src="images/메인페이지_22.png" width="58" height="61" alt=""></td>
-                <td colspan="2" rowspan="4">
-                    <a href="#" onclick="showProfileDetail()">
-                        <img src="images/메인페이지_23.png" width="52" height="298" border="0" alt="프로필 영역"></a></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="61" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="3" rowspan="3">
-                    <a href="#" onclick="showProfileDetail()">
-                        <img src="images/메인페이지_24.png" width="58" height="237" border="0" alt="프로필 영역"></a></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="180" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="4" rowspan="2">
-                    <a href="#" onclick="showProfileDetail()">
-                        <img src="images/메인페이지_25.png" width="54" height="57" border="0" alt="프로필 영역"></a></td>
-                <td colspan="10">
-                    <img src="images/메인페이지_26.png" width="257" height="14" alt=""></td>
-                <td colspan="7" rowspan="2">
-                    <a href="#" onclick="showProfileDetail()">
-                        <img src="images/메인페이지_27.png" width="359" height="57" border="0" alt="프로필 영역"></a></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="14" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="10">
-                    <a href="#" onclick="showProfileDetail()">
-                        <img src="images/메인페이지_28.png" width="257" height="43" border="0" alt="프로필 영역"></a></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="43" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="32">
-                    <img src="images/메인페이지_29.png" width="988" height="66" alt=""></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="66" alt=""></td>
-            </tr>
-            <tr>
-                <td rowspan="20">
-                    <img src="images/메인페이지_30.png" width="1" height="1458" alt=""></td>
-                <td colspan="10" rowspan="4">
-                    <a href="#" onclick="showAssetDetail()">
-                        <img src="images/메인페이지_31.png" width="203" height="238" border="0" alt="에셋 문구"></a></td>
-                <td colspan="21">
-                    <img src="images/메인페이지_32.png" width="784" height="109" alt=""></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="109" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="22">
-                    <a href="#" onclick="showAssetDetail()">
-                        <img src="images/메인페이지_33.png" width="787" height="57" border="0" alt="에셋 영역"></a></td>
-                <td colspan="2" rowspan="11">
-                    <img src="images/메인페이지_34.png" width="61" height="520" alt=""></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="57" alt=""></td>
-            </tr>
-            <tr>
-                <td rowspan="3">
-                    <a href="#" onclick="showAssetDetail()">
-                        <img src="images/메인페이지_35.png" width="19" height="116" border="0" alt="에셋 영역"></a></td>
-                <td colspan="9">
-                    <a href="#" onclick="showCashDetail()">
-                        <img src="images/메인페이지_36.png" width="375" height="52" border="0" alt="보유 현금"></a></td>
-                <td colspan="12" rowspan="3">
-                    <a href="#" onclick="showAssetDetail()">
-                        <img src="images/메인페이지_37.png" width="393" height="116" border="0" alt="에셋 영역"></a></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="52" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="9" rowspan="2">
-                    <a href="#" onclick="showAssetDetail()">
-                        <img src="images/메인페이지_38.png" width="375" height="64" border="0" alt="에셋 영역"></a></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="20" alt=""></td>
-            </tr>
-            <tr>
-                <td rowspan="16">
-                    <img src="images/메인페이지_39.png" width="2" height="1220" alt=""></td>
-                <td colspan="9">
-                    <a href="#" onclick="showAssetDetail()">
-                        <img src="images/메인페이지_40.png" width="201" height="44" border="0" alt="에셋 영역"></a></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="44" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="5" rowspan="4">
-                    <a href="#" onclick="showAssetDetail()">
-                        <img src="images/메인페이지_41.png" width="55" height="172" border="0" alt="에셋 영역"></a></td>
-                <td colspan="22">
-                    <a href="#" onclick="showStockDetail('삼성전자')">
-                        <img src="images/메인페이지_42.png" width="874" height="48" border="0" alt="자산 분류1"></a></td>
-                <td colspan="4" rowspan="4">
-                    <a href="#" onclick="showAssetDetail()">
-                        <img src="images/메인페이지_43.png" width="59" height="172" border="0" alt="에셋 영역"></a></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="48" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="22">
-                    <a href="#" onclick="showAssetDetail()">
-                        <img src="images/메인페이지_44.png" width="874" height="31" border="0" alt="에셋 영역"></a></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="31" alt=""></td>
-            </tr>
-            <tr>
-                <td rowspan="2">
-                    <a href="#" onclick="showAssetDetail()">
-                        <img src="images/메인페이지_45.png" width="1" height="93" border="0" alt="에셋 영역"></a></td>
-                <td colspan="11">
-                    <a href="#" onclick="showStockDetail('청년희망적금')">
-                        <img src="images/메인페이지_46.png" width="444" height="48" border="0" alt="자산 분류 2"></a></td>
-                <td colspan="10" rowspan="2">
-                    <a href="#" onclick="showAssetDetail()">
-                        <img src="images/메인페이지_47.png" width="429" height="93" border="0" alt="에셋 영역"></a></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="48" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="11">
-                    <a href="#" onclick="showAssetDetail()">
-                        <img src="images/메인페이지_48.png" width="444" height="45" border="0" alt="에셋 영역"></a></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="45" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="31">
-                    <img src="images/메인페이지_49.png" width="988" height="66" alt=""></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="66" alt=""></td>
-            </tr>
-            <tr>
-                <td rowspan="10">
-                    <img src="images/메인페이지_50.png" width="2" height="938" alt=""></td>
-                <td colspan="12">
-                    <a href="#" onclick="showPortfolioDetail()">
-                        <img src="images/메인페이지_51.png" width="296" height="46" border="0" alt="포트폴리오 문구"></a></td>
-                <td colspan="18" rowspan="2">
-                    <img src="images/메인페이지_52.png" width="690" height="109" alt=""></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="46" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="12">
-                    <img src="images/메인페이지_53.png" width="296" height="63" alt=""></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="63" alt=""></td>
-            </tr>
-            <tr>
-                <td rowspan="8">
-                    <img src="images/메인페이지_54.png" width="5" height="829" alt=""></td>
-                <td colspan="30">
-                    <a href="#" onclick="showPortfolioDetail()">
-                        <img src="images/메인페이지_55.png" width="987" height="41" border="0" alt="포트폴리오 영역"></a></td>
-                <td rowspan="8">
-                    <img src="images/메인페이지_56.png" width="55" height="829" alt=""></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="41" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="11" rowspan="2">
-                    <a href="#" onclick="showPortfolioDetail()">
-                        <img src="images/메인페이지_57.png" width="291" height="450" border="0" alt="포트폴리오 영역"></a></td>
-                <td colspan="9">
-                    <a href="#" onclick="showPortfolioChart()">
-                        <img src="images/메인페이지_58.png" width="408" height="409" border="0" alt="포트폴리오 그래프"></a></td>
-                <td colspan="10" rowspan="2">
-                    <a href="#" onclick="showPortfolioDetail()">
-                        <img src="images/메인페이지_59.png" width="288" height="450" border="0" alt="포트폴리오 영역"></a></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="409" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="9">
-                    <a href="#" onclick="showPortfolioDetail()">
-                        <img src="images/메인페이지_60.png" width="408" height="41" border="0" alt="포트폴리오 영역"></a></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="41" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="14">
-                    <img src="images/메인페이지_61.png" width="393" height="132" alt=""></td>
-                <td colspan="2" rowspan="3">
-                    <a href="#" onclick="navigateToPage('a5.html')">
-                        <img src="images/메인페이지_62.png" width="180" height="180" border="0" alt="등급존 이동 버튼"></a></td>
-                <td colspan="14" rowspan="2">
-                    <img src="images/메인페이지_63.png" width="414" height="135" alt=""></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="132" alt=""></td>
-            </tr>
-            <tr>
-                <td rowspan="4">
-                    <img src="images/메인페이지_64.png" width="17" height="206" alt=""></td>
-                <td colspan="5" rowspan="3">
-                    <a href="#" onclick="showMainScreen()">
-                        <img src="images/메인페이지_65.png" width="95" height="96" border="0" alt="메인페이지 버튼"></a></td>
-                <td colspan="3" rowspan="4">
-                    <img src="images/메인페이지_66.png" width="120" height="206" alt=""></td>
-                <td colspan="4" rowspan="3">
-                    <a href="#" onclick="navigateToPage('a2.html')">
-                        <img src="images/메인페이지_67.png" width="76" height="96" border="0" alt="뉴스페이지 버튼"></a></td>
-                <td rowspan="4">
-                    <img src="images/메인페이지_68.png" width="85" height="206" alt=""></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="3" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="2" rowspan="3">
-                    <img src="images/메인페이지_69.png" width="72" height="203" alt=""></td>
-                <td colspan="4" rowspan="2">
-                    <a href="#" onclick="navigateToPage('a4.html')">
-                        <img src="images/메인페이지_70.png" width="93" height="93" border="0" alt="게임페이지 버튼"></a></td>
-                <td colspan="8" rowspan="3">
-                    <a href="#" onclick="navigateToPage('a3.html')">
-                        <img src="images/메인페이지_71.png" width="249" height="203" border="0" alt="더보기란 버튼"></a></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="45" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="2" rowspan="2">
-                    <img src="images/메인페이지_72.png" width="180" height="158" alt=""></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="48" alt=""></td>
-            </tr>
-            <tr>
-                <td colspan="5">
-                    <img src="images/메인페이지_73.png" width="95" height="110" alt=""></td>
-                <td colspan="4">
-                    <img src="images/메인페이지_74.png" width="76" height="110" alt=""></td>
-                <td colspan="4">
-                    <img src="images/메인페이지_75.png" width="93" height="110" alt=""></td>
-                <td>
-                    <img src="images/스페이서.gif" width="1" height="110" alt=""></td>
-            </tr>
-        </table>
+    <div class="min-h-screen bg-gray-100 relative">
+        <!-- 전체 배경 레이어 -->
+        <img src="images/레이어.png" alt="배경 레이어" class="absolute top-0 left-0 w-full h-full opacity-5 z-0">
+        
+        <!-- 상단 헤더 -->
+        <div class="bg-white shadow-sm p-4 relative z-10">
+            <div class="flex items-center justify-between max-w-md mx-auto">
+                <div class="flex items-center space-x-2">
+                    <img src="images/똑부리.png" alt="똑부리" class="w-8 h-8">
+                    <img src="images/빛 반사.png" alt="FINE U" class="h-8">
+                    <i id="syncIcon" class="fas fa-sync-alt text-green-500 text-sm ml-2" title="Firebase 동기화"></i>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button class="w-8 h-8 flex items-center justify-center">
+                        <img src="images/알림.png" alt="알림" class="w-6 h-6">
+                    </button>
+                    <button onclick="toggleProfileMenu()" class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                        <img id="headerProfileImage" src="" alt="Profile" class="w-10 h-10 rounded-full object-cover hidden">
+                        <i id="headerProfileIcon" class="fas fa-user text-blue-400"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 프로필 메뉴 -->
+        <div id="profileMenu" class="profile-menu">
+            <div class="profile-menu-item" onclick="showProfileModal()">
+                <i class="fas fa-user"></i>
+                <span>프로필 설정</span>
+            </div>
+            <div class="profile-menu-item" onclick="syncWithFirebase()">
+                <i class="fas fa-sync-alt"></i>
+                <span>데이터 동기화</span>
+            </div>
+            <div class="profile-menu-item">
+                <img src="images/환경설정.png" alt="환경설정" class="w-4 h-4">
+                <span>환경설정</span>
+            </div>
+            <div class="profile-menu-item" onclick="clearAllData()">
+                <i class="fas fa-trash"></i>
+                <span>데이터 초기화</span>
+            </div>
+            <div class="profile-menu-item" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>로그아웃</span>
+            </div>
+        </div>
+
+        <!-- 프로필 섹션 -->
+        <div class="max-w-md mx-auto px-4 py-6 relative">
+            <!-- 배경 요소들 -->
+            <img src="images/사각형.png" alt="배경" class="absolute top-0 left-0 w-full opacity-10 z-0">
+            
+            <div class="bg-white rounded-2xl p-6 card-shadow mb-6 relative z-10">
+                <div class="flex items-center justify-between mb-4">
+                    <img src="images/PROFILE.png" alt="PROFILE" class="h-6">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-paperclip text-gray-400"></i>
+                        <span id="lastSyncTime" class="text-xs text-gray-400">동기화: 방금 전</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <img id="profileImage" src="" alt="Profile" class="profile-image hidden">
+                        <div id="profilePlaceholder" class="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center">
+                            <i class="fas fa-user text-blue-400 text-2xl"></i>
+                        </div>
+                        <button onclick="uploadProfileImage()" class="absolute -bottom-1 -right-1 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                            <i class="fas fa-camera text-white text-xs"></i>
+                        </button>
+                        <input type="file" id="imageUpload" accept="image/*" style="display: none;" onchange="handleImageUpload(event)">
+                    </div>
+                    <div class="flex-1">
+                        <div id="userLevel" class="level-badge-profile level-yellow mb-2">
+                            YELLOW
+                        </div>
+                        <p class="font-bold text-gray-800" id="userName">사용자</p>
+                        <p class="text-xs text-gray-500" id="userExp">0 / 3000 EXP</p>
+                        <p class="text-xs text-gray-400" id="loginMethod">Realtime DB</p>
+                        <p id="specialAccountBadge" class="text-xs text-orange-600 font-bold hidden">⭐ 특별 계정</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 자산 현황 -->
+            <div class="bg-white rounded-2xl p-6 card-shadow mb-6 relative z-10">
+                <!-- 배경 요소 -->
+                <img src="images/사각형-1.png" alt="배경" class="absolute top-0 left-0 w-full h-full opacity-5 z-0">
+                <img src="images/ASSETS.png" alt="ASSETS" class="h-6 mb-4 relative z-10">
+                <div class="bg-blue-50 rounded-xl p-4 mb-4">
+                    <div class="flex items-center space-x-2 mb-2">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <span class="text-2xl font-bold text-gray-800 price-update" id="totalAssets">10,000,000원</span>
+                    </div>
+                    <div class="text-sm">
+                        <span class="text-gray-600">평가손익: </span>
+                        <span id="totalProfitLoss" class="font-semibold text-green-600 price-update">+0원 (0.00%)</span>
+                    </div>
+                </div>
+                <div id="assetsList" class="space-y-3">
+                    <!-- 자산 목록이 여기에 표시됩니다 -->
+                </div>
+            </div>
+
+            <!-- 포트폴리오 섹션 -->
+            <div class="bg-white rounded-2xl p-6 card-shadow mb-24 relative z-10">
+                <!-- 배경 요소 -->
+                <img src="images/사각형-2.png" alt="배경" class="absolute top-0 left-0 w-full h-full opacity-5 z-0">
+                <img src="images/PORTFOLIO.png" alt="PORTFOLIO" class="h-6 mb-4 relative z-10">
+                <div class="relative mb-4">
+                    <img src="images/원 그래프.png" alt="포트폴리오 차트" class="w-full h-48 object-contain">
+                </div>
+                <div id="portfolioDetails" class="space-y-3">
+                    <!-- 포트폴리오 상세 정보가 여기에 표시됩니다 -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 하단 네비게이션 -->
+        <div class="bottom-navigation relative z-10">
+            <div class="nav-container">
+                <button onclick="showMainScreen()" class="nav-item active">
+                    <img src="images/집.png" alt="홈" class="w-6 h-6">
+                    <span>홈</span>
+                </button>
+                <button onclick="navigateToPage('a2.html')" class="nav-item">
+                    <img src="images/문서.png" alt="뉴스" class="w-6 h-6 opacity-60">
+                    <span class="text-gray-400">뉴스</span>
+                </button>
+                <div class="nav-center">
+                    <div class="relative">
+                        <img src="images/BLACK.png" alt="BLACK" class="w-12 h-12 mx-auto mb-2">
+                        <div id="navLevelBadge" class="level-badge-nav level-yellow" onclick="navigateToPage('a5.html')" style="position: relative; top: 0; left: 0; transform: none;">
+                            YELLOW
+                        </div>
+                    </div>
+                </div>
+                <button onclick="navigateToPage('a4.html')" class="nav-item">
+                    <img src="images/채팅.png" alt="게임" class="w-6 h-6 opacity-60">
+                    <span class="text-gray-400">게임</span>
+                </button>
+                <button onclick="navigateToPage('a3.html')" class="nav-item">
+                    <img src="images/더보기.png" alt="더보기" class="w-6 h-6 opacity-60">
+                    <span class="text-gray-400">더보기</span>
+                </button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -1655,7 +1340,7 @@ async function performLogin() {
 // 메인 화면 표시
 function showMainScreen(userId) {
     try {
-        updateDebugInfo('메인 화면 표시: ' + (userId || '네비게이션'));
+        updateDebugInfo('메인 화면 표시: ' + userId);
         
         var loginScreen = document.getElementById('loginScreen');
         var mainScreen = document.getElementById('mainScreen');
@@ -1669,20 +1354,7 @@ function showMainScreen(userId) {
         }
         
         updateDisplay();
-        updateMainScreenData(); // 새로운 디자인 업데이트 추가
-        
-        if (userId) { // 로그인 후 호출된 경우에만
-            startAutoSave();
-        }
-        
-        // 네비게이션 활성화 상태 업데이트
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.classList.remove('active');
-        });
-        const homeNavItem = document.querySelector('.nav-item[onclick*="showMainScreen"]');
-        if (homeNavItem) {
-            homeNavItem.classList.add('active');
-        }
+        startAutoSave();
         
         updateDebugInfo('메인 화면 표시 완료');
         
@@ -2396,110 +2068,6 @@ document.addEventListener('visibilitychange', async function() {
 });
 
 updateDebugInfo('Firebase Realtime Database 연동 메인 페이지 스크립트 로드 완료 - gunwoo55 - 2025년 8월 9일 13:06:13 KST');
-
-// 누락된 유틸리티 함수들
-function getUserLevel() {
-    return levelSystem[userLevel] || levelSystem['yellow'];
-}
-
-function calculateTotalProfitLoss() {
-    let totalProfit = 0;
-    
-    // userAssets에서 각 자산의 손익 계산
-    if (userAssets && typeof userAssets === 'object') {
-        Object.keys(userAssets).forEach(function(assetName) {
-            const asset = userAssets[assetName];
-            if (asset && asset.shares && asset.avgPrice && asset.currentPrice) {
-                const profit = (asset.currentPrice - asset.avgPrice) * asset.shares;
-                totalProfit += profit;
-            }
-        });
-    }
-    
-    return totalProfit;
-}
-
-function formatCurrency(amount) {
-    if (typeof amount !== 'number') {
-        amount = 0;
-    }
-    return amount.toLocaleString('ko-KR') + '원';
-}
-
-function hideAllScreens() {
-    const screens = document.querySelectorAll('.screen');
-    screens.forEach(screen => {
-        screen.classList.remove('active');
-    });
-}
-
-// 새로운 메인페이지 디자인 관련 함수들
-function showNotifications() {
-    alert('알림 기능은 곧 추가될 예정입니다.');
-}
-
-function showPortfolioDetail() {
-    navigateToPage('a4.html');
-}
-
-function showProfileDetail() {
-    alert('프로필 상세 정보를 표시합니다.');
-}
-
-function showAssetDetail() {
-    alert('자산 상세 정보를 표시합니다.');
-}
-
-function showCashDetail() {
-    alert('보유 현금 정보를 표시합니다.');
-}
-
-function showStockDetail(stockName) {
-    alert(stockName + ' 상세 정보를 표시합니다.');
-}
-
-function showPortfolioChart() {
-    alert('포트폴리오 차트를 표시합니다.');
-}
-
-function updateMainScreenData() {
-    if (!currentUser) return;
-    
-    // 프로필 정보 업데이트
-    const profileName = document.getElementById('profileName');
-    const profileLevel = document.getElementById('profileLevel');
-    const profileAvatar = document.getElementById('profileAvatar');
-    
-    if (profileName) profileName.textContent = currentUser.name || '사용자';
-    if (profileLevel) profileLevel.textContent = getUserLevel().name + ' 등급';
-    if (profileAvatar) {
-        profileAvatar.innerHTML = currentUser.name ? currentUser.name.charAt(0).toUpperCase() : '<i class="fas fa-user"></i>';
-    }
-    
-    // 총 자산 업데이트
-    const totalBalance = document.getElementById('totalBalance');
-    const balanceChange = document.getElementById('balanceChange');
-    
-    if (totalBalance) {
-        totalBalance.textContent = formatCurrency(totalAssets);
-    }
-    
-    if (balanceChange) {
-        const change = calculateTotalProfitLoss();
-        const changePercent = totalAssets > 0 ? (change / (totalAssets - change) * 100).toFixed(2) : 0;
-        balanceChange.textContent = `${change >= 0 ? '+' : ''}${formatCurrency(change)} (${changePercent}%)`;
-        balanceChange.className = change >= 0 ? 'balance-change profit' : 'balance-change loss';
-    }
-}
-
-// 기존 updateDisplay 함수에 메인 화면 업데이트 추가
-const originalUpdateDisplay = updateDisplay;
-updateDisplay = function() {
-    if (originalUpdateDisplay) {
-        originalUpdateDisplay();
-    }
-    updateMainScreenData();
-};
 </script>
 
 </body>
