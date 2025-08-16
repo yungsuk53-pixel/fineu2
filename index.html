@@ -421,20 +421,16 @@
         <!-- 상단 헤더 -->
         <div class="bg-white shadow-sm p-4 relative z-10">
             <div class="flex items-center justify-between max-w-md mx-auto">
+                <button onclick="toggleProfileMenu()" class="w-12 h-12 flex items-center justify-center">
+                    <img src="images/똑부리.png" alt="프로필" class="w-8 h-8">
+                </button>
                 <div class="flex items-center space-x-2">
-                    <img src="images/똑부리.png" alt="똑부리" class="w-8 h-8">
                     <img src="images/빛 반사.png" alt="FINE U" class="h-8">
                     <i id="syncIcon" class="fas fa-sync-alt text-green-500 text-sm ml-2" title="Firebase 동기화"></i>
                 </div>
-                <div class="flex items-center space-x-2">
-                    <button class="w-8 h-8 flex items-center justify-center">
-                        <img src="images/알림.png" alt="알림" class="w-6 h-6">
-                    </button>
-                    <button onclick="toggleProfileMenu()" class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                        <img id="headerProfileImage" src="" alt="Profile" class="w-10 h-10 rounded-full object-cover hidden">
-                        <i id="headerProfileIcon" class="fas fa-user text-blue-400"></i>
-                    </button>
-                </div>
+                <button class="w-8 h-8 flex items-center justify-center">
+                    <img src="images/알림.png" alt="알림" class="w-6 h-6">
+                </button>
             </div>
         </div>
 
@@ -492,8 +488,7 @@
                         </div>
                         <p class="font-bold text-gray-800" id="userName">사용자</p>
                         <p class="text-xs text-gray-500" id="userExp">0 / 3000 EXP</p>
-                        <p class="text-xs text-gray-400" id="loginMethod">Realtime DB</p>
-                        <p id="specialAccountBadge" class="text-xs text-orange-600 font-bold hidden">⭐ 특별 계정</p>
+                        <p class="text-xs text-gray-400" id="daysWithFineU">FINE U와 함께한지 1일</p>
                     </div>
                 </div>
             </div>
@@ -857,6 +852,7 @@ function getInitialUserData(userId) {
             isSpecialAccount: true,
             specialType: special.description,
             loginMethod: 'realtime_db',
+            joinDate: new Date().toISOString(),
             lastUpdated: new Date().toISOString(),
             createdAt: new Date().toISOString()
         };
@@ -880,6 +876,7 @@ function getInitialUserData(userId) {
             transactions: [],
             isSpecialAccount: false,
             loginMethod: 'realtime_db',
+            joinDate: new Date().toISOString(),
             lastUpdated: new Date().toISOString(),
             createdAt: new Date().toISOString()
         };
@@ -1374,16 +1371,17 @@ function updateDisplay() {
             userNameElement.textContent = currentUser.name || currentUser.id;
         }
         
-        // 로그인 방법 표시
-        var loginMethodElement = document.getElementById('loginMethod');
-        if (loginMethodElement) {
-            var methodText = {
-                'realtime_db': 'Realtime DB',
-                'local': '로컬 로그인',
-                'local_backup': '로컬 백업',
-                'new_user': '신규 사용자'
-            };
-            loginMethodElement.textContent = methodText[currentUser.loginMethod] || 'Realtime DB';
+        // FINE U와 함께한 일수 계산 및 표시
+        var daysWithFineUElement = document.getElementById('daysWithFineU');
+        if (daysWithFineUElement) {
+            // 기존 사용자의 경우 joinDate가 없을 수 있으므로 초기화
+            if (!currentUser.joinDate) {
+                currentUser.joinDate = new Date().toISOString();
+                saveUserData();
+            }
+            var joinDate = currentUser.joinDate;
+            var daysDiff = Math.floor((new Date() - new Date(joinDate)) / (1000 * 60 * 60 * 24)) + 1;
+            daysWithFineUElement.textContent = `FINE U와 함께한지 ${daysDiff}일`;
         }
         
         // 특별 계정 뱃지 표시
