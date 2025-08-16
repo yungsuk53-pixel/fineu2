@@ -106,6 +106,18 @@
         .asset-commodity { border-color: #6B7280; }
         .asset-cash { border-color: #6B7280; }
         
+        .days-with-fineu {
+            font-family: 'Comic Sans MS', cursive, 'Malgun Gothic', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            color: #6B7280;
+        }
+        
+        .days-with-fineu .number {
+            color: #F59E0B;
+            font-size: 18px;
+        }
+        
         .modal {
             backdrop-filter: blur(10px);
         }
@@ -414,10 +426,7 @@
 
 <!-- 메인 화면 -->
 <div id="mainScreen" class="screen">
-    <div class="min-h-screen bg-gray-100 relative">
-        <!-- 전체 배경 레이어 -->
-        <img src="images/레이어.png" alt="배경 레이어" class="absolute top-0 left-0 w-full h-full opacity-5 z-0">
-        
+    <div class="min-h-screen bg-gray-100">
         <!-- 상단 헤더 -->
         <div class="bg-white shadow-sm p-4 relative z-10">
             <div class="flex items-center justify-between max-w-md mx-auto">
@@ -459,10 +468,7 @@
         </div>
 
         <!-- 프로필 섹션 -->
-        <div class="max-w-md mx-auto px-4 py-6 relative">
-            <!-- 배경 요소들 -->
-            <img src="images/사각형.png" alt="배경" class="absolute top-0 left-0 w-full opacity-10 z-0">
-            
+        <div class="max-w-md mx-auto px-4 py-6">
             <div class="relative z-10 mb-6">
                 <img src="images/PROFILE.png" alt="PROFILE" class="h-6 mb-2">
                 <div class="bg-white rounded-2xl p-6 card-shadow">
@@ -490,7 +496,7 @@
                         </div>
                         <p class="font-bold text-gray-800" id="userName">사용자</p>
                         <p class="text-xs text-gray-500" id="userExp">0 / 3000 EXP</p>
-                        <p class="text-xs text-gray-400" id="daysWithFineU">FINE U와 함께한지 1일</p>
+                        <p class="days-with-fineu" id="daysWithFineU">FINE U와 함께한지 <span class="number">1</span>일</p>
                     </div>
                 </div>
                 </div>
@@ -500,8 +506,6 @@
             <div class="relative z-10 mb-6">
                 <img src="images/ASSETS.png" alt="ASSETS" class="h-6 mb-2">
                 <div class="bg-white rounded-2xl p-6 card-shadow">
-                    <!-- 배경 요소 -->
-                    <img src="images/사각형-1.png" alt="배경" class="absolute top-0 left-0 w-full h-full opacity-5 z-0">
                     <div class="bg-blue-50 rounded-xl p-4 mb-4 relative z-10">
                     <div class="flex items-center space-x-2 mb-2">
                         <i class="fas fa-star text-yellow-400"></i>
@@ -521,8 +525,6 @@
             <div class="relative z-10 mb-24">
                 <img src="images/PORTFOLIO.png" alt="PORTFOLIO" class="h-6 mb-2">
                 <div class="bg-white rounded-2xl p-6 card-shadow">
-                    <!-- 배경 요소 -->
-                    <img src="images/사각형-2.png" alt="배경" class="absolute top-0 left-0 w-full h-full opacity-5 z-0">
                     <div class="relative mb-4 z-10">
                         <canvas id="portfolioChart" style="height: 200px;"></canvas>
                     </div>
@@ -534,7 +536,8 @@
 
         <!-- 하단 네비게이션 -->
         <div class="bottom-navigation relative z-10">
-            <div class="nav-container">
+            <img src="images/네비게이션바.png" alt="네비게이션바" class="w-full h-auto">
+            <div class="nav-container absolute inset-0">
                 <button onclick="showMainScreen()" class="nav-item active">
                     <img src="images/집.png" alt="홈" class="w-6 h-6">
                     <span>홈</span>
@@ -1355,6 +1358,11 @@ function showMainScreen(userId) {
             mainScreen.classList.add('active');
         }
         
+        // 메인화면 진입 시에만 데이터 동기화
+        if (firebaseConnected && database && currentUser) {
+            syncWithFirebase();
+        }
+        
         updateDisplay();
         startAutoSave();
         
@@ -1386,7 +1394,7 @@ function updateDisplay() {
             }
             var joinDate = currentUser.joinDate;
             var daysDiff = Math.floor((new Date() - new Date(joinDate)) / (1000 * 60 * 60 * 24)) + 1;
-            daysWithFineUElement.textContent = `FINE U와 함께한지 ${daysDiff}일`;
+            daysWithFineUElement.innerHTML = `FINE U와 함께한지 <span class="number">${daysDiff}</span>일`;
         }
         
         // 특별 계정 뱃지 표시
