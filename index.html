@@ -2310,6 +2310,35 @@ document.addEventListener('visibilitychange', async function() {
 
 updateDebugInfo('Firebase Realtime Database 연동 메인 페이지 스크립트 로드 완료 - gunwoo55 - 2025년 8월 9일 13:06:13 KST');
 
+// 누락된 유틸리티 함수들
+function getUserLevel() {
+    return levelSystem[userLevel] || levelSystem['yellow'];
+}
+
+function calculateTotalProfitLoss() {
+    let totalProfit = 0;
+    
+    // userAssets에서 각 자산의 손익 계산
+    if (userAssets && typeof userAssets === 'object') {
+        Object.keys(userAssets).forEach(function(assetName) {
+            const asset = userAssets[assetName];
+            if (asset && asset.shares && asset.avgPrice && asset.currentPrice) {
+                const profit = (asset.currentPrice - asset.avgPrice) * asset.shares;
+                totalProfit += profit;
+            }
+        });
+    }
+    
+    return totalProfit;
+}
+
+function formatCurrency(amount) {
+    if (typeof amount !== 'number') {
+        amount = 0;
+    }
+    return amount.toLocaleString('ko-KR') + '원';
+}
+
 // 새로운 메인페이지 디자인 관련 함수들
 function showNotifications() {
     alert('알림 기능은 곧 추가될 예정입니다.');
