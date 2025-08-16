@@ -463,11 +463,13 @@
             <!-- 배경 요소들 -->
             <img src="images/사각형.png" alt="배경" class="absolute top-0 left-0 w-full opacity-10 z-0">
             
-            <div class="bg-white rounded-2xl p-6 card-shadow mb-6 relative z-10">
-                <div class="flex items-center justify-between mb-4">
-                    <img src="images/PROFILE.png" alt="PROFILE" class="h-6">
-                    <div class="flex items-center space-x-2">
-                        <i class="fas fa-paperclip text-gray-400"></i>
+            <div class="relative z-10 mb-6">
+                <img src="images/PROFILE.png" alt="PROFILE" class="h-6 mb-2">
+                <div class="bg-white rounded-2xl p-6 card-shadow">
+                    <div class="flex items-center justify-between mb-4">
+                        <div></div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-paperclip text-gray-400"></i>
                         <span id="lastSyncTime" class="text-xs text-gray-400">동기화: 방금 전</span>
                     </div>
                 </div>
@@ -491,14 +493,16 @@
                         <p class="text-xs text-gray-400" id="daysWithFineU">FINE U와 함께한지 1일</p>
                     </div>
                 </div>
+                </div>
             </div>
 
             <!-- 자산 현황 -->
-            <div class="bg-white rounded-2xl p-6 card-shadow mb-6 relative z-10">
-                <!-- 배경 요소 -->
-                <img src="images/사각형-1.png" alt="배경" class="absolute top-0 left-0 w-full h-full opacity-5 z-0">
-                <img src="images/ASSETS.png" alt="ASSETS" class="h-6 mb-4 relative z-10">
-                <div class="bg-blue-50 rounded-xl p-4 mb-4">
+            <div class="relative z-10 mb-6">
+                <img src="images/ASSETS.png" alt="ASSETS" class="h-6 mb-2">
+                <div class="bg-white rounded-2xl p-6 card-shadow">
+                    <!-- 배경 요소 -->
+                    <img src="images/사각형-1.png" alt="배경" class="absolute top-0 left-0 w-full h-full opacity-5 z-0">
+                    <div class="bg-blue-50 rounded-xl p-4 mb-4 relative z-10">
                     <div class="flex items-center space-x-2 mb-2">
                         <i class="fas fa-star text-yellow-400"></i>
                         <span class="text-2xl font-bold text-gray-800 price-update" id="totalAssets">10,000,000원</span>
@@ -507,20 +511,21 @@
                         <span class="text-gray-600">평가손익: </span>
                         <span id="totalProfitLoss" class="font-semibold text-green-600 price-update">+0원 (0.00%)</span>
                     </div>
-                </div>
-                <div id="assetsList" class="space-y-3">
-                    <!-- 자산 목록이 여기에 표시됩니다 -->
+                    <div id="assetsList" class="space-y-3 relative z-10">
+                        <!-- 자산 목록이 여기에 표시됩니다 -->
+                    </div>
                 </div>
             </div>
 
             <!-- 포트폴리오 섹션 -->
-            <div class="bg-white rounded-2xl p-6 card-shadow mb-24 relative z-10">
-                <!-- 배경 요소 -->
-                <img src="images/사각형-2.png" alt="배경" class="absolute top-0 left-0 w-full h-full opacity-5 z-0">
-                <img src="images/PORTFOLIO.png" alt="PORTFOLIO" class="h-6 mb-4 relative z-10">
-                <div class="relative mb-4">
-                    <img src="images/원 그래프.png" alt="포트폴리오 차트" class="w-full h-48 object-contain">
-                </div>
+            <div class="relative z-10 mb-24">
+                <img src="images/PORTFOLIO.png" alt="PORTFOLIO" class="h-6 mb-2">
+                <div class="bg-white rounded-2xl p-6 card-shadow">
+                    <!-- 배경 요소 -->
+                    <img src="images/사각형-2.png" alt="배경" class="absolute top-0 left-0 w-full h-full opacity-5 z-0">
+                    <div class="relative mb-4 z-10">
+                        <canvas id="portfolioChart" style="height: 200px;"></canvas>
+                    </div>
                 <div id="portfolioDetails" class="space-y-3">
                     <!-- 포트폴리오 상세 정보가 여기에 표시됩니다 -->
                 </div>
@@ -1592,11 +1597,19 @@ function initPortfolioChart() {
         
         var labels = ['현금'];
         var data = [cash];
-        var colors = ['#6B7280'];
+        var colors = ['#D1C4E9']; // 파스텔 보라
         
         // 투자 자산 추가
         if (currentUser.portfolio) {
-            var assetColors = ['#8B5CF6', '#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#6B7280'];
+            // 파스텔 톤 색상 팔레트
+            var assetColors = [
+                '#F8BBD9', // 파스텔 핑크
+                '#B3E5FC', // 파스텔 블루
+                '#C8E6C9', // 파스텔 그린
+                '#FFE0B2', // 파스텔 오렌지
+                '#FFCDD2', // 파스텔 레드
+                '#E1BEE7'  // 파스텔 퍼플
+            ];
             var colorIndex = 0;
             
             Object.keys(currentUser.portfolio).forEach(function(assetType) {
