@@ -1581,7 +1581,7 @@ async function performLogin() {
 // 메인 화면 표시
 function showMainScreen(userId) {
     try {
-        updateDebugInfo('메인 화면 표시: ' + userId);
+        updateDebugInfo('메인 화면 표시: ' + (userId || '네비게이션'));
         
         var loginScreen = document.getElementById('loginScreen');
         var mainScreen = document.getElementById('mainScreen');
@@ -1595,7 +1595,20 @@ function showMainScreen(userId) {
         }
         
         updateDisplay();
-        startAutoSave();
+        updateMainScreenData(); // 새로운 디자인 업데이트 추가
+        
+        if (userId) { // 로그인 후 호출된 경우에만
+            startAutoSave();
+        }
+        
+        // 네비게이션 활성화 상태 업데이트
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.classList.remove('active');
+        });
+        const homeNavItem = document.querySelector('.nav-item[onclick*="showMainScreen"]');
+        if (homeNavItem) {
+            homeNavItem.classList.add('active');
+        }
         
         updateDebugInfo('메인 화면 표시 완료');
         
@@ -2339,6 +2352,13 @@ function formatCurrency(amount) {
     return amount.toLocaleString('ko-KR') + '원';
 }
 
+function hideAllScreens() {
+    const screens = document.querySelectorAll('.screen');
+    screens.forEach(screen => {
+        screen.classList.remove('active');
+    });
+}
+
 // 새로운 메인페이지 디자인 관련 함수들
 function showNotifications() {
     alert('알림 기능은 곧 추가될 예정입니다.');
@@ -2376,19 +2396,6 @@ function updateMainScreenData() {
         balanceChange.textContent = `${change >= 0 ? '+' : ''}${formatCurrency(change)} (${changePercent}%)`;
         balanceChange.className = change >= 0 ? 'balance-change profit' : 'balance-change loss';
     }
-}
-
-// 메인 화면 표시 시 데이터 업데이트
-function showMainScreen() {
-    hideAllScreens();
-    document.getElementById('mainScreen').classList.add('active');
-    updateMainScreenData();
-    
-    // 네비게이션 활성화 상태 업데이트
-    document.querySelectorAll('.nav-item').forEach(item => {
-        item.classList.remove('active');
-    });
-    document.querySelector('.nav-item[onclick="showMainScreen()"]').classList.add('active');
 }
 
 // 기존 updateDisplay 함수에 메인 화면 업데이트 추가
