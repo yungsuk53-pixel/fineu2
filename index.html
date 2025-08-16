@@ -10,7 +10,7 @@
     <meta http-equiv="Expires" content="0">
     <meta name="cache-buster" content="v4.0.0-realtime-db">
     
-    <title>FINE U - Firebase Realtime Database 연동</title>
+    <title>FINE U - 금융 플랫폼</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -27,7 +27,283 @@
             zoom: 1;
             -webkit-text-size-adjust: 100%;
             -ms-text-size-adjust: 100%;
+            margin: 0;
+            padding: 0;
+            background: url('images/레이어.png') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
         }
+        
+        .main-container {
+            width: 100%;
+            max-width: 390px;
+            margin: 0 auto;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.1));
+            position: relative;
+        }
+        
+        .header-section {
+            padding: 20px 15px;
+            text-align: center;
+            color: white;
+        }
+        
+        .logo-area {
+            margin-bottom: 30px;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .logo-subtitle {
+            font-size: 12px;
+            opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .profile-section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .profile-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .profile-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4A6FA5, #6B8DC7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .profile-name {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .profile-level {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .notification-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .notification-btn:hover {
+            background: #e0e0e0;
+            transform: scale(1.05);
+        }
+        
+        .balance-section {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .balance-label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .balance-amount {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .balance-change {
+            font-size: 14px;
+            color: #e74c3c;
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .action-btn {
+            background: #f8f9fa;
+            border: none;
+            border-radius: 12px;
+            padding: 15px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        
+        .action-icon {
+            width: 30px;
+            height: 30px;
+            margin: 0 auto 8px;
+            background: linear-gradient(135deg, #4A6FA5, #6B8DC7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+        }
+        
+        .action-label {
+            font-size: 12px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .portfolio-section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .portfolio-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .portfolio-item:last-child {
+            border-bottom: none;
+        }
+        
+        .portfolio-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .portfolio-shares {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .portfolio-return {
+            text-align: right;
+        }
+        
+        .portfolio-amount {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .portfolio-change {
+            font-size: 12px;
+            color: #e74c3c;
+        }
+        
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 390px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 10px 0;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .nav-items {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 4px;
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .nav-label {
+            font-size: 10px;
+            color: #666;
+        }
+        
+        .nav-item.active .nav-icon,
+        .nav-item.active .nav-label {
+            color: #4A6FA5;
+        }
+        
         .screen {
             display: none;
             min-height: 100vh;
@@ -350,42 +626,6 @@
             text-align: center;
             margin: 4px 0;
         }
-
-        /* 추가된 스타일 */
-        @media (max-width: 640px) {
-            .nav-container {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            .nav-item {
-                font-size: 10px;
-            }
-            .nav-item i {
-                font-size: 18px;
-            }
-            .nav-center {
-                grid-column: 2 / span 2;
-            }
-            .profile-menu {
-                top: 70px;
-                right: 10px;
-                width: 90%;
-            }
-            .profile-image {
-                width: 60px;
-                height: 60px;
-            }
-            .login-container {
-                width: 100%;
-            }
-            .bottom-navigation {
-                padding: 8px 0 4px 0;
-            }
-            .debug-info {
-                font-size: 9px;
-                padding: 6px;
-                max-width: 90%;
-            }
-        }
     </style>
 </head>
 <body>
@@ -443,52 +683,122 @@
 
 <!-- 메인 화면 -->
 <div id="mainScreen" class="screen">
-    <div class="min-h-screen bg-gray-100 relative">
-        <!-- 배경 이미지 -->
-        <img src="images/레이어.png" alt="Background" class="absolute inset-0 w-full h-full object-cover">
+    <div class="main-container">
+        <!-- 헤더 섹션 -->
+        <div class="header-section">
+            <div class="logo-area">
+                <div class="logo-text">FINE U</div>
+                <div class="logo-subtitle">당신의 금융 파트너</div>
+            </div>
+        </div>
 
-        <!-- 상단 헤더 -->
-        <div class="bg-white shadow-sm p-4 relative z-10">
-            <div class="flex items-center justify-between max-w-md mx-auto">
-                <h1 class="text-2xl font-bold text-blue-400">메인페이지</h1>
-                <button onclick="toggleProfileMenu()" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                    <i class="fas fa-user text-blue-400"></i>
+        <!-- 프로필 섹션 -->
+        <div class="profile-section">
+            <div class="profile-header">
+                <div class="profile-info">
+                    <div class="profile-avatar" id="profileAvatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <div class="profile-name" id="profileName">사용자</div>
+                        <div class="profile-level" id="profileLevel">YELLOW 등급</div>
+                    </div>
+                </div>
+                <button class="notification-btn" onclick="showNotifications()">
+                    <i class="fas fa-bell"></i>
+                </button>
+            </div>
+
+            <!-- 자산 현황 -->
+            <div class="balance-section">
+                <div class="balance-label">총 자산</div>
+                <div class="balance-amount" id="totalBalance">10,000,000원</div>
+                <div class="balance-change" id="balanceChange">+180,000원 (+1.8%)</div>
+            </div>
+
+            <!-- 빠른 액션 버튼들 -->
+            <div class="quick-actions">
+                <button class="action-btn" onclick="navigateToPage('a2.html')">
+                    <div class="action-icon">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="action-label">뉴스</div>
+                </button>
+                <button class="action-btn" onclick="navigateToPage('a3.html')">
+                    <div class="action-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="action-label">거래</div>
+                </button>
+                <button class="action-btn" onclick="navigateToPage('a4.html')">
+                    <div class="action-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <div class="action-label">분석</div>
+                </button>
+                <button class="action-btn" onclick="navigateToPage('a5.html')">
+                    <div class="action-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <div class="action-label">설정</div>
                 </button>
             </div>
         </div>
 
-        <!-- 콘텐츠 섹션 -->
-        <div class="max-w-md mx-auto px-4 py-6 relative z-10">
-            <div class="bg-white rounded-2xl p-6 card-shadow mb-6">
-                <h2 class="text-xl font-bold mb-4">환영합니다!</h2>
-                <p class="text-gray-600">이곳은 메인페이지입니다. 다양한 정보를 확인하세요.</p>
+        <!-- 포트폴리오 섹션 -->
+        <div class="portfolio-section">
+            <div class="section-title">
+                <span>포트폴리오</span>
+                <button onclick="showPortfolioDetail()" style="background: none; border: none; color: #666; font-size: 12px;">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
-
-            <!-- 버튼 섹션 -->
-            <div class="grid grid-cols-2 gap-4">
-                <button class="w-full py-3 bg-blue-500 text-white rounded-lg font-medium">버튼 1</button>
-                <button class="w-full py-3 bg-green-500 text-white rounded-lg font-medium">버튼 2</button>
+            
+            <div class="portfolio-item">
+                <div>
+                    <div class="portfolio-name">삼성전자</div>
+                    <div class="portfolio-shares">100주</div>
+                </div>
+                <div class="portfolio-return">
+                    <div class="portfolio-amount">7,500,000원</div>
+                    <div class="portfolio-change">+135,000원 (+1.8%)</div>
+                </div>
+            </div>
+            
+            <div class="portfolio-item">
+                <div>
+                    <div class="portfolio-name">청년희망적금</div>
+                    <div class="portfolio-shares">월 30만원</div>
+                </div>
+                <div class="portfolio-return">
+                    <div class="portfolio-amount">2,500,000원</div>
+                    <div class="portfolio-change">+75,000원 (+3.0%)</div>
+                </div>
             </div>
         </div>
 
         <!-- 하단 네비게이션 -->
-        <div class="bottom-navigation">
-            <div class="nav-container">
-                <button class="nav-item">
-                    <i class="fas fa-home"></i>
-                    <span>홈</span>
+        <div class="bottom-nav">
+            <div class="nav-items">
+                <button class="nav-item active" onclick="showMainScreen()">
+                    <i class="fas fa-home nav-icon"></i>
+                    <span class="nav-label">홈</span>
                 </button>
-                <button class="nav-item">
-                    <i class="fas fa-search"></i>
-                    <span>검색</span>
+                <button class="nav-item" onclick="navigateToPage('a2.html')">
+                    <i class="fas fa-newspaper nav-icon"></i>
+                    <span class="nav-label">뉴스</span>
                 </button>
-                <button class="nav-item">
-                    <i class="fas fa-bell"></i>
-                    <span>알림</span>
+                <button class="nav-item" onclick="navigateToPage('a3.html')">
+                    <i class="fas fa-exchange-alt nav-icon"></i>
+                    <span class="nav-label">거래</span>
                 </button>
-                <button class="nav-item">
-                    <i class="fas fa-user"></i>
-                    <span>프로필</span>
+                <button class="nav-item" onclick="navigateToPage('a4.html')">
+                    <i class="fas fa-chart-line nav-icon"></i>
+                    <span class="nav-label">분석</span>
+                </button>
+                <button class="nav-item" onclick="navigateToPage('a5.html')">
+                    <i class="fas fa-user nav-icon"></i>
+                    <span class="nav-label">마이</span>
                 </button>
             </div>
         </div>
@@ -1999,6 +2309,67 @@ document.addEventListener('visibilitychange', async function() {
 });
 
 updateDebugInfo('Firebase Realtime Database 연동 메인 페이지 스크립트 로드 완료 - gunwoo55 - 2025년 8월 9일 13:06:13 KST');
+
+// 새로운 메인페이지 디자인 관련 함수들
+function showNotifications() {
+    alert('알림 기능은 곧 추가될 예정입니다.');
+}
+
+function showPortfolioDetail() {
+    navigateToPage('a4.html');
+}
+
+function updateMainScreenData() {
+    if (!currentUser) return;
+    
+    // 프로필 정보 업데이트
+    const profileName = document.getElementById('profileName');
+    const profileLevel = document.getElementById('profileLevel');
+    const profileAvatar = document.getElementById('profileAvatar');
+    
+    if (profileName) profileName.textContent = currentUser.name || '사용자';
+    if (profileLevel) profileLevel.textContent = getUserLevel().name + ' 등급';
+    if (profileAvatar) {
+        profileAvatar.innerHTML = currentUser.name ? currentUser.name.charAt(0).toUpperCase() : '<i class="fas fa-user"></i>';
+    }
+    
+    // 총 자산 업데이트
+    const totalBalance = document.getElementById('totalBalance');
+    const balanceChange = document.getElementById('balanceChange');
+    
+    if (totalBalance) {
+        totalBalance.textContent = formatCurrency(totalAssets);
+    }
+    
+    if (balanceChange) {
+        const change = calculateTotalProfitLoss();
+        const changePercent = totalAssets > 0 ? (change / (totalAssets - change) * 100).toFixed(2) : 0;
+        balanceChange.textContent = `${change >= 0 ? '+' : ''}${formatCurrency(change)} (${changePercent}%)`;
+        balanceChange.className = change >= 0 ? 'balance-change profit' : 'balance-change loss';
+    }
+}
+
+// 메인 화면 표시 시 데이터 업데이트
+function showMainScreen() {
+    hideAllScreens();
+    document.getElementById('mainScreen').classList.add('active');
+    updateMainScreenData();
+    
+    // 네비게이션 활성화 상태 업데이트
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('active');
+    });
+    document.querySelector('.nav-item[onclick="showMainScreen()"]').classList.add('active');
+}
+
+// 기존 updateDisplay 함수에 메인 화면 업데이트 추가
+const originalUpdateDisplay = updateDisplay;
+updateDisplay = function() {
+    if (originalUpdateDisplay) {
+        originalUpdateDisplay();
+    }
+    updateMainScreenData();
+};
 </script>
 
 </body>
