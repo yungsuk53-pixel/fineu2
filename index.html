@@ -551,11 +551,8 @@
                     <span class="text-gray-400">뉴스</span>
                 </button>
                 <div class="nav-center">
-                    <div class="relative">
-                        <img src="images/BLACK.png" alt="BLACK" class="w-12 h-12 mx-auto mb-2">
-                        <div id="navLevelBadge" class="level-badge-nav level-yellow" onclick="navigateToPage('a5.html')" style="position: relative; top: 0; left: 0; transform: none;">
-                            YELLOW
-                        </div>
+                    <div id="navLevelBadge" class="level-badge-nav level-yellow" onclick="navigateToPage('a5.html')">
+                        YELLOW
                     </div>
                 </div>
                 <button onclick="navigateToPage('a4.html')" class="nav-item">
@@ -1226,7 +1223,7 @@ async function checkAutoLogin() {
             if (firebaseConnected) {
                 var success = await loadUserDataFromFirebase(lastUserId);
                 if (success) {
-                    showMainScreen(lastUserId);
+                    updateDisplay();
                     return true;
                 }
             }
@@ -1242,7 +1239,7 @@ async function checkAutoLogin() {
                 cash = currentUser.cash;
                 userAssets = currentUser.portfolio;
                 
-                showMainScreen(lastUserId);
+                updateDisplay();
                 return true;
             }
         }
@@ -1986,11 +1983,13 @@ document.addEventListener('DOMContentLoaded', async function() {
         // 자동 로그인 확인
         var autoLoginSuccess = await checkAutoLogin();
         if (!autoLoginSuccess) {
-            updateDebugInfo('자동 로그인 실패 - 기본 사용자로 메인화면 표시');
+            updateDebugInfo('자동 로그인 실패 - 기본 사용자로 메인화면 유지');
             
-            // 기본 사용자 데이터로 메인화면 표시
-            currentUser = getInitialUserData('guest');
-            showMainScreen('guest');
+            // 기본 사용자 데이터 설정 (화면 전환 없이)
+            if (!currentUser) {
+                currentUser = getInitialUserData('guest');
+                updateDisplay();
+            }
             
             if (firebaseInitialized) {
                 updateFirebaseStatus('connected', 'Firebase Realtime Database 준비 완료');
